@@ -38,7 +38,7 @@ choco upgrade cascadiafonts -y
 choco upgrade cascadiamonopl -y
 choco upgrade cascadiacodepl -y
 
-IF NOT EXIST "c:\Program Files\Git\usr\bin\zsh.exe" (
+IF NOT EXIST "C:\Program Files\Git\usr\bin\zsh.exe" (
     curl -L https://mirror.msys2.org/msys/x86_64/zsh-5.8-5-x86_64.pkg.tar.zst > %TEMP%/zsh.pkg.tar.zst
     zstd -d %TEMP%/zsh.pkg.tar.zst 
     move %TEMP%\zsh.pkg "C:\Program Files\Git\zsh.pkg.tar"
@@ -48,8 +48,8 @@ IF NOT EXIST "c:\Program Files\Git\usr\bin\zsh.exe" (
     del "C:\Program Files\Git\zsh.pkg.tar"
 )
 
-IF NOT EXIST %HOMEPATH%/.antigen.zsh (
-    curl -L git.io/antigen > %HOMEPATH%/.antigen.zsh
+IF NOT EXIST "%HOMEPATH%/.antigen.zsh" (
+    curl -L git.io/antigen > "%HOMEPATH%/.antigen.zsh"
 )
 
 {{- end }}
