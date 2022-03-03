@@ -1,0 +1,39 @@
+#
+# This file is managed by chezmoi. Always edit it with the command
+# chezmoi edit ~/.zshrc
+# chezmoi diff
+# chezmoi -v apply
+#
+
+# MODERN APPLICATIONS
+    exa_params=('--git' '--icons' '--classify' '--group-directories-first' '--time-style=long-iso' '--group' '--color-scale')
+
+{{- if ne .chezmoi.os "windows" }}
+    alias ls='exa ${exa_params}'
+    alias l='exa --git-ignore ${exa_params}'
+    alias ll='exa --all --header --long ${exa_params}'
+    alias llm='exa --all --header --long --sort=modified ${exa_params}'
+    alias la='exa -lbhHigUmuSa'
+    alias lx='exa -lbhHigUmuSa@'
+    alias lt='exa --tree'
+    alias tree='exa --tree'
+{{- end }}
+
+{{- if eq .chezmoi.os "windows" }}
+    alias ls='ls -h --color=auto'
+    alias l='ls -l'
+    alias la='ls -a'
+    alias ll='ls -la'
+{{- end }}
+
+    alias cat='bat --paging=never'
+    alias less='bat'
+    alias more='bat'
+
+# CONVENIENCE
+
+    # show path broken into lines
+    alias path='echo -e ${PATH//:/\\n}' # nice path printing
+    alias cz='chezmoi'
+    alias cze='chezmoi edit'
+    alias cza='chezmoi apply'
