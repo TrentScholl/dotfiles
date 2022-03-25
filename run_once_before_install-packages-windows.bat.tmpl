@@ -3,18 +3,11 @@
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 choco feature enable -n allowGlobalConfirmation
 
-:: install scoop
-@powershell  -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb get.scoop.sh | iex"
-
 :: upgrade all the packages
-
-:::: BROWSERS
-choco upgrade microsoft-edge -y
 
 :::: DEV TOOLS
 choco upgrade git -y
 choco upgrade golang -y
-choco upgrade microsoft-windows-terminal -y
 choco upgrade vscode -y
 
 :::: MEDIA
@@ -26,30 +19,5 @@ choco upgrade zoxide -y
 
 :::: UTILS
 choco upgrade powertoys -y
-
-:::: FONTS
-choco upgrade firacode -y
-choco upgrade fontbase -y
-choco upgrade sourcecodepro -y
-choco upgrade hackfont -y
-choco upgrade cascadiamono -y
-choco upgrade cascadiacode -y
-choco upgrade cascadiafonts -y
-choco upgrade cascadiamonopl -y
-choco upgrade cascadiacodepl -y
-
-IF NOT EXIST "C:\Program Files\Git\usr\bin\zsh.exe" (
-    curl -L https://mirror.msys2.org/msys/x86_64/zsh-5.8-5-x86_64.pkg.tar.zst > %TEMP%/zsh.pkg.tar.zst
-    zstd -d %TEMP%/zsh.pkg.tar.zst 
-    move %TEMP%\zsh.pkg "C:\Program Files\Git\zsh.pkg.tar"
-    cd  "C:\Program Files\Git\"
-    tar -xvf zsh.pkg.tar
-    del %TEMP%\zsh.pkg.tar.zst
-    del "C:\Program Files\Git\zsh.pkg.tar"
-)
-
-IF NOT EXIST "%HOMEPATH%/.antigen.zsh" (
-    curl -L git.io/antigen > "%HOMEPATH%/.antigen.zsh"
-)
 
 {{- end }}
